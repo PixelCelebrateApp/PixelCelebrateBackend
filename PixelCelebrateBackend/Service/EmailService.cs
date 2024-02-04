@@ -45,8 +45,6 @@ namespace PixelCelebrateBackend.Service
                 emailBodyBuilder.TextBody = emailData.Body;
                 message.Body = emailBodyBuilder.ToMessageBody();
 
-                //exista posibilitatea sa trimit mail la mai multe adrese deodata, mai bun pt mine -> weee;
-
                 SmtpClient mailClient = new SmtpClient();
                 await mailClient.ConnectAsync(_emailSettings.Server, _emailSettings.Port, MailKit.Security.SecureSocketOptions.StartTls);
                 await mailClient.AuthenticateAsync(_emailSettings.UserName, _emailSettings.Password);

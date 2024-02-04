@@ -25,9 +25,7 @@ namespace PixelCelebrateBackend.Scheduler
         public void Start()
         {
             _cts = new();
-            Console.WriteLine("Token: " + _cts.Token.IsCancellationRequested);
             _notificationValue = GetNotificationValue();
-            Console.WriteLine("NEW VALUE: " + _notificationValue);
             _task = ExecuteWorkAsync();
         }
 
@@ -58,8 +56,6 @@ namespace PixelCelebrateBackend.Scheduler
 
                     List<GetUserDto> birthdayUsers = GetBirthdayUsers(date);
                     List<GetUserDto> otherUsers = GetOtherUsers(date);
-
-                    Console.WriteLine("Are there any birthday users? " + !birthdayUsers.IsNullOrEmpty());
 
                     // Send email in bulk to a group of user (only possible with a domain):
                     /*
@@ -99,13 +95,10 @@ namespace PixelCelebrateBackend.Scheduler
 
         public async Task StopAsync()
         {
-            Console.WriteLine("WTF");
             if (_task is null)
             {
-                Console.WriteLine("NUULLLLL");
                 return;
             }
-            Console.WriteLine("CANCELING");
             _cts.Cancel();
             await _task;
             _cts.Dispose();

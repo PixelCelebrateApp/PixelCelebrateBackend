@@ -78,7 +78,6 @@ namespace PixelCelebrateBackend.Controllers
             _context.SaveChanges();
 
             //restart scheduler:
-            Console.WriteLine("Schedule value: " + _scheduler._notificationValue);
             _scheduler.StopAsync().ConfigureAwait(false);
             _scheduler.Start();
 
